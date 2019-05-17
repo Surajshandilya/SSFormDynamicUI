@@ -249,7 +249,11 @@ class FormViewController: UIViewController {
             request.httpMethod = "POST"
             request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
             request.setValue("application/json", forHTTPHeaderField: "Accept")
-            request.httpBody = jsonData
+            let str = "filename_\(self.getCurrentDateWithTime())"
+            let params: [String: Any] = ["filename": str, "filesize": jsonData.count
+            ]
+            let searialStr = try! JSONSerialization.data(withJSONObject: params, options: [])
+            request.httpBody = searialStr
             let task = URLSession.shared.dataTask(with: request as URLRequest) {
                 data, response, error in
                 print(response)
@@ -261,11 +265,18 @@ class FormViewController: UIViewController {
             task.resume()
         }
     }
+    private func getCurrentDateWithTime() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm"
+        return formatter.string(from: Date())
+    }
     private func showUploadAlert() {
         let alert = UIAlertController(title: "SSFormIOS",
                                       message: "Form is uploaded successfully.",
                                       preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (buttonAction) in
+            self.navigationController?.popViewController(animated: true)
+        }))
         self.present(alert, animated: true)
     }
 }
