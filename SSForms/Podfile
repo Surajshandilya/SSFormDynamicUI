@@ -7,4 +7,6 @@ target 'SSForms' do
 
   # Pods for SSForms
 pod 'Cartography', '~> 3.0'
+pod 'ReachabilitySwift'
+pod 'Alamofire'
 end

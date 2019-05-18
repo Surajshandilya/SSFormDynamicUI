@@ -1,16 +1,24 @@
 PODS:
+  - Alamofire (4.8.2)
   - Cartography (3.1.0)
+  - ReachabilitySwift (4.3.1)
 
 DEPENDENCIES:
+  - Alamofire
   - Cartography (~> 3.0)
+  - ReachabilitySwift
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Alamofire
     - Cartography
+    - ReachabilitySwift
 
 SPEC CHECKSUMS:
+  Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   Cartography: 1988b7578871a56c036e7af17195cb2190edf18c
+  ReachabilitySwift: 4032e2f59586e11e3b0ebe15b167abdd587a388b
 
-PODFILE CHECKSUM: 955fbf2165a71c903e49d6bc192f3c07ed3d0dcb
+PODFILE CHECKSUM: d3da1fd29940f9accec39d5381ec41b6c8198a60
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.6.2
