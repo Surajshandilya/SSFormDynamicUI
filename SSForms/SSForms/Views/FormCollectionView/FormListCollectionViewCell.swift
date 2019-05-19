@@ -11,7 +11,7 @@ import UIKit
 class FormListCollectionViewCell: ContainerCollectionViewCell, ReuseIdentifiable, StaticCellable {
     
     // StaticCellable Protocol
-    static var totalCellHeight: CGFloat { return 81 }
+    static var totalCellHeight: CGFloat { return 40 }
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var nameField: UITextField!

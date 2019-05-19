@@ -23,16 +23,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="293" height="49"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nda-mY-bM1">
-                                <rect key="frame" x="8" y="8" width="83" height="21"/>
+                                <rect key="frame" x="20" y="8" width="83" height="19.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="83" id="drI-BA-Eve"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter first name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yab-Tb-bcU">
-                                <rect key="frame" x="99" y="3.5" width="186" height="30"/>
+                                <rect key="frame" x="111" y="3" width="162" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -45,8 +45,8 @@
                         <constraints>
                             <constraint firstItem="Nda-mY-bM1" firstAttribute="top" secondItem="FDg-O2-uGP" secondAttribute="top" constant="8" id="2cW-r7-VA7"/>
                             <constraint firstItem="Yab-Tb-bcU" firstAttribute="centerY" secondItem="Nda-mY-bM1" secondAttribute="centerY" id="6yB-cO-JH2"/>
-                            <constraint firstAttribute="trailing" secondItem="Yab-Tb-bcU" secondAttribute="trailing" constant="8" id="P3M-8Y-tq0"/>
-                            <constraint firstItem="Nda-mY-bM1" firstAttribute="leading" secondItem="FDg-O2-uGP" secondAttribute="leading" constant="8" id="cIy-AR-T35"/>
+                            <constraint firstAttribute="trailing" secondItem="Yab-Tb-bcU" secondAttribute="trailing" constant="20" id="P3M-8Y-tq0"/>
+                            <constraint firstItem="Nda-mY-bM1" firstAttribute="leading" secondItem="FDg-O2-uGP" secondAttribute="leading" constant="20" id="cIy-AR-T35"/>
                             <constraint firstItem="Yab-Tb-bcU" firstAttribute="leading" secondItem="Nda-mY-bM1" secondAttribute="trailing" constant="8" id="ehq-fw-bmy"/>
                         </constraints>
                     </view>

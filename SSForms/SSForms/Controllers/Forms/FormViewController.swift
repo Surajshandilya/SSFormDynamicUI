@@ -6,21 +6,6 @@
 //  Copyright © 2019 Suraj. All rights reserved.
 //
 
-/*
-{
-    "users": [
-    {
-    "firstName": "John",
-    "lastName": "Rey"
-    },
-    {
-    "firstName": "Mathew",
-    "lastName": "More"
-    }
-    ]
-}
-*/
-
 import UIKit
 
 class FormViewController: UIViewController {
@@ -34,57 +19,53 @@ class FormViewController: UIViewController {
     }
     @IBOutlet weak var formListCollectionView: UICollectionView!
     @IBOutlet weak var viewLoader: SSActivityIndicatorView!
-    
-    private let jsonObject: [String: Any] = [
-        "type": "object",
-        "required": [
-            "age"
-        ],
-        "properties": {[
-            "firstName": [
-                "type": "string",
-                "minLength": 2,
-                "maxLength": 20
-            ],
-            "lastName": [
-                "type": "string",
-                "minLength": 5,
-                "maxLength": 15
-            ],
-            "age": [
-                "type": "integer",
-                "minimum": 18,
-                "maximum": 100
-            ],
-            "gender": [
-                "type": "string",
-                "enum": [
-                "Male",
-                "Female",
-                "Undisclosed"
-                ]
-            ]
-            ]},
-        "custom": "hj"
-    ]
-    
-    
-    var sectionTitles: [String] = [""]
+
+    var sectionTitles: [String] = ["Resident's Name",
+                                   "Nursing/Residential Home",
+                                   "Lead GP or Cluster Lead",
+                                   "Date of Assesment",
+                                   "Mental State Assessment? MMSE",
+                                   "Mini Geriatric Depression Score or 6CIT",
+                                   "Current Medical Problems",
+                                   "Systems Review - problems identified",
+                                   "Examination findings:",
+                                   "Specific Additional Areas"]
     private var xibCellsToRegister: [UICollectionViewCell.Type] {
-        return [FormListCollectionViewCell.self]
+        return [FormListCollectionViewCell.self,
+                    FormSelectiveOptionViewCell.self,
+                    FormPopUpSelectionViewCell.self]
     }
     var sections: [Section] = []
+    private let personalDetail: [String] = ["First Name",
+                                                                  "Last Name",
+                                                                  "D.O.B",
+                                                                  "Gender"]
+    private let personalDetailPlaceholder: [String] = ["Enter First Name",
+                                            "Enter Last Name",
+                                            "Enter D.O.B (MM/DD/YYYY)"]
+    private let addressDetail: [String] = ["Flat No",
+                                            "Street",
+                                            "Zip Code"]
+    private let addressDetailPlaceholder: [String] = ["Enter Flat Number",
+                                                       "Enter Street",
+                                                       "Enter Zip Code"]
     var firstName: String?
     var lastName: String?
     var address: String?
     var gender: String?
     var getFormModels = [GetFormModel]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupCollectionView()
+//        fetchJsonDataFromFile()
+        initialSectionSetup()
+    }
+    private func fetchJsonDataFromFile() {
         //Check jsonObject is valid or not
-        let valid = JSONSerialization.isValidJSONObject(jsonObject) // tru
-        print("is valid json: \(valid)")
-        guard let url = Bundle.main.url(forResource: "form", withExtension: "json") else { return }
+        //        let valid = JSONSerialization.isValidJSONObject(jsonObject) // tru
+        //        print("is valid json: \(valid)")
+        guard let url = Bundle.main.url(forResource: "careForm", withExtension: "json") else { return }
         do {
             let data = try Data(contentsOf: url)
             let object = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
@@ -95,84 +76,20 @@ class FormViewController: UIViewController {
         } catch {
             print(error.localizedDescription)
         }
-       
-//self.viewLoader.startAnimating(withUserInteration: false)
-//        makeApiCall()
-        setupCollectionView()
-//        initialSectionSetup()
     }
-    func readJSONObject(object: [String: AnyObject]) {
-        guard let users = object["users"] as? [[String: AnyObject]] else { return }
-//        for user in users {
-//            guard let firstName = user["firstName"] as? String,
-//                let lastName = user["lastName"] as? String else { break }
-//            let model = GetFormModel(firstName: firstName, lastName: lastName)
-//            getFormModels.append(model)
+   private func readJSONObject(object: [String: AnyObject]) {
+        guard let medicalForm = object["medical_form"] else { return }
+        guard let outerSect = medicalForm["sections"] else { return }
+        guard let obje = outerSect else { return }
+//        for i in 1..<residentInfo.count {
 //            let str = ""
 //            sectionTitles.append(str)
 //        }
-        for i in 1..<users.count {
-            let str = ""
-            sectionTitles.append(str)
-        }
 //        print("all models: \(getFormModels)")
         //Update first sectionTitle
         dynamicInitialSectionSetup()
     }
-    private func getSingleDecodeModel() {
-            let jsonString = """
-        {
-            "FirstName": "John",
-            "LastName": "Doe",
-        }
-        """
-        if let jsonData = jsonString.data(using: .utf8) {
-            let decoder = JSONDecoder()
-            do {
-                // decoding our data
-                let formModel = try decoder.decode(GetFormModel.self, from: jsonData)
-                print(formModel)
-                //Encoding data
-                let jsonData = try! JSONEncoder().encode(formModel)
-                //Convert data into Json Str
-                let encodeJsonString = String(data: jsonData, encoding: .utf8)!
-                print(encodeJsonString)
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
-    }
-    private func getArrayOfDecodeModel() {
-                let jsonString = """
-        [{
-        "FirstName": "Federico",
-         "LastName": "Zanetello",
-        },{
-        "FirstName": "John",
-         "LastName": "Doe",
-        },{
-        "FirstName": "King",
-         "LastName": "Raj",
-        }]
-        """
-        // our native (JSON) data
-        if let jsonData = jsonString.data(using: .utf8)
-        {
-            let decoder = JSONDecoder()
-            
-            do {
-                // decoding our data
-                let formModel = try decoder.decode([GetFormModel].self, from: jsonData)
-                formModel.forEach { print($0) }
-                //Encode data
-                let jsonData = try! JSONEncoder().encode(formModel)
-                let encodeJsonString = String(data: jsonData, encoding: .utf8)!
-                print(encodeJsonString)
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
-    }
+    
     private func makeApiCall() {
         let urlStr = "https://jsonplaceholder.typicode.com/todos"
         guard let url = URL(string: urlStr) else {return}
@@ -200,22 +117,105 @@ class FormViewController: UIViewController {
             let name = String(describing: $0)
             self.formListCollectionView.register(UINib(nibName: name, bundle: nil), forCellWithReuseIdentifier: name)
         }
+        self.formListCollectionView.register(UINib(nibName: "FormListHeaderReusableView",
+                                                         bundle: nil),
+                                             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                                   withReuseIdentifier: "FormListHeaderReusableView")
+        self.formListCollectionView.register(UINib(nibName: "FormListBottomReusableView",
+                                                   bundle: nil),
+                                             forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+                                             withReuseIdentifier: "FormListBottomReusableView")
     }
     private func initialSectionSetup() {
         //Set up sections
         if sections.count == 0 {
-            let numberOfSection: Int = 1
+            let numberOfSection: Int = sectionTitles.count
             for index in 1...numberOfSection {
                 var section = Section()
                 section.sectionTitle = sectionTitles[index - 1]
-                section.cellsIdentifier = []
+                section.cellsIdentifier = [FormListCollectionViewCell.reuseIdentifier]
                 sections.append(section)
             }
-            var section = Section()
-            section.cellsIdentifier = [FormListCollectionViewCell.reuseIdentifier]
-            sections[0] = section
+            //Load all cells data
+            loadPersonalDetailSection()
+            loadAddressSection()
+            loadLeadGpOrClusterSection()
+            loadDateOfAssesmentSection()
+            loadMentalStateMMSESection()
+            loadMiniGeriatricDepressionSection()
+            loadCurrentMedicalProblemSection()
+            loadSystemReviewProblemSection()
+            loadExaminationFindingsSection()
+            loadSpecificAdditinalAreaSection()
             return
         }
+    }
+    func loadPersonalDetailSection() {
+        var section = Section()
+        section.sectionTitle = sectionTitles[0]
+        section.cellsIdentifier = [FormListCollectionViewCell.reuseIdentifier,
+                                                FormListCollectionViewCell.reuseIdentifier,
+                                                FormListCollectionViewCell.reuseIdentifier,
+                                                FormSelectiveOptionViewCell.reuseIdentifier]
+        sections[0] = section
+    }
+    func loadAddressSection() {
+        var section = Section()
+        section.sectionTitle = sectionTitles[1]
+        section.cellsIdentifier = [FormListCollectionViewCell.reuseIdentifier,
+                                   FormListCollectionViewCell.reuseIdentifier,
+                                   FormListCollectionViewCell.reuseIdentifier]
+        sections[1] = section
+    }
+    func loadLeadGpOrClusterSection() {
+        var section = Section()
+        section.sectionTitle = sectionTitles[2]
+        section.cellsIdentifier = [FormPopUpSelectionViewCell.reuseIdentifier]
+        sections[2] = section
+    }
+    func loadDateOfAssesmentSection() {
+        var section = Section()
+        section.sectionTitle = sectionTitles[3]
+        section.cellsIdentifier = [FormListCollectionViewCell.reuseIdentifier]
+        sections[3] = section
+    }
+    func loadMentalStateMMSESection() {
+        var section = Section()
+        section.sectionTitle = sectionTitles[4]
+        section.cellsIdentifier = [FormSelectiveOptionViewCell.reuseIdentifier]
+        sections[4] = section
+    }
+    func loadMiniGeriatricDepressionSection() {
+        var section = Section()
+        section.sectionTitle = sectionTitles[5]
+        section.cellsIdentifier = [FormSelectiveOptionViewCell.reuseIdentifier]
+        sections[5] = section
+    }
+    func loadCurrentMedicalProblemSection() {
+        var section = Section()
+        section.sectionTitle = sectionTitles[6]
+        section.cellsIdentifier = [FormListCollectionViewCell.reuseIdentifier]
+        sections[6] = section
+    }
+    func loadSystemReviewProblemSection() {
+        var section = Section()
+        section.sectionTitle = sectionTitles[7]
+        section.cellsIdentifier = [FormListCollectionViewCell.reuseIdentifier]
+        sections[7] = section
+    }
+    func loadExaminationFindingsSection() {
+        var section = Section()
+        section.sectionTitle = sectionTitles[8]
+        section.cellsIdentifier = [FormListCollectionViewCell.reuseIdentifier]
+        sections[8] = section
+    }
+    func loadSpecificAdditinalAreaSection() {
+        var section = Section()
+        section.sectionTitle = sectionTitles[9]
+        section.cellsIdentifier = [FormSelectiveOptionViewCell.reuseIdentifier,
+                                                FormSelectiveOptionViewCell.reuseIdentifier,
+                                                FormPopUpSelectionViewCell.reuseIdentifier]
+        sections[9] = section
     }
     private func dynamicInitialSectionSetup() {
         //Set up sections
@@ -285,13 +285,39 @@ extension FormViewController: UICollectionViewDataSource, UICollectionViewDelega
         return  sections.count
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard sections[section].isExpanded || section == 0 else { return 0 }
-        return sections.count // sections[section].cellsIdentifier.count
+        guard sections[section].isExpanded else { return 0 } // || section == 0 if you want to bydefault expand section 0
+        return sections[section].cellsIdentifier.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         return collectionView.dequeueReusableCell(withReuseIdentifier:
-            sections[indexPath.section].cellsIdentifier[indexPath.section],
+            sections[indexPath.section].cellsIdentifier[indexPath.item],
                                                   for: indexPath) // if we want to show individual no of rows of section then call sections[indexPath.section].cellsIdentifier[indexPath.item]
+    }
+    func collectionView(_ collectionView: UICollectionView,
+                        viewForSupplementaryElementOfKind kind: String,
+                        at indexPath: IndexPath) -> UICollectionReusableView {
+        guard kind == UICollectionView.elementKindSectionHeader else {
+            let reusableView = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
+                                                                               withReuseIdentifier: "FormListBottomReusableView",
+                                                                               for: indexPath)
+            guard let footerView = reusableView as? FormListBottomReusableView else { return UICollectionReusableView() }
+            return footerView
+        }
+        let reusableView = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
+                                                                           withReuseIdentifier: "FormListHeaderReusableView",
+                                                                           for: indexPath)
+        guard let headerView = reusableView as? FormListHeaderReusableView else { return UICollectionReusableView() }
+        headerView.subviews.forEach { $0.isHidden = false }
+        //It will hide header at section 0.
+//        indexPath.section == 0 ? headerView.subviews.forEach { $0.isHidden = false } : ()
+        headerView.delegate = self as? FormListHeaderReusableViewDelegate
+        headerView.sectionHeaderLabel.text = sections[indexPath.section].sectionTitle
+        headerView.toggleExpandCollapseButton.tag = indexPath.section
+        headerView.toogleHeaderButton.tag = indexPath.section
+        headerView.toggleExpandCollapseButton.setTitle("+", for: .normal)
+        sections[indexPath.section].isExpanded ? headerView.toggleExpandCollapseButton.setTitle("-", for: .normal) : ()
+//        indexPath.section == 2 ? (headerView.toogleHeaderButton.isEnabled = false) : (headerView.toogleHeaderButton.isEnabled = true)
+        return headerView
     }
 }
 extension FormViewController: UICollectionViewDelegateFlowLayout {
@@ -304,48 +330,107 @@ extension FormViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let identifier = sections[indexPath.section].cellsIdentifier[indexPath.item]
-//        guard let metaObject = xibCellsToRegister.first(where: { identifier == String(describing: $0)}) else { return .zero }
-//        guard let staticCellable = metaObject as? StaticCellable.Type else { return .zero }
-        return CGSize(width: collectionView.frame.width, height: 50)
+        let identifier = sections[indexPath.section].cellsIdentifier[indexPath.item]
+        guard let metaObject = xibCellsToRegister.first(where: { identifier == String(describing: $0)}) else { return .zero }
+        guard let staticCellable = metaObject as? StaticCellable.Type else { return .zero }
+        return CGSize(width: collectionView.frame.width, height: staticCellable.totalCellHeight)
+    }
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: section == 0 ? 45.0 : 45.0)
+    }
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        referenceSizeForFooterInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: section == 0 ? 1.0 : 1.0)
     }
     private func configure(_ cell: UICollectionViewCell, forItemAt indexPath: IndexPath, in collectionView: UICollectionView) {
         (cell as? ContainerCollectionViewCell)?.width = collectionView.bounds.width
         switch cell {
         case let infoCell as FormListCollectionViewCell:
-            switch indexPath.item {
+            var name = ""
+            var placeHolder = ""
+            var fieldTag = 0
+            switch indexPath.section {
             case 0:
-                infoCell.nameLabel.text = "First Name"
-                infoCell.nameField.placeholder = "Enter first name"
-                infoCell.nameField.tag = 0
+                name = personalDetail[indexPath.item]
+                placeHolder = personalDetailPlaceholder[indexPath.item]
+                fieldTag = indexPath.item //Need to pass correct
             case 1:
-                infoCell.nameLabel.text = "Last Name"
-                infoCell.nameField.placeholder = "Enter last name"
-                infoCell.nameField.tag = 1
-            case 2:
-                infoCell.nameLabel.text = "Address"
-                infoCell.nameField.placeholder = "Enter Address"
-                infoCell.nameField.tag = 2
+                name = addressDetail[indexPath.item]
+                placeHolder = addressDetailPlaceholder[indexPath.item]
+                fieldTag = indexPath.item //Need to pass correct
+            case 3:
+                name = "Date of Assesment"
+                placeHolder = "Enter Assesment Date (MM/DD/YY)"
+                fieldTag = indexPath.item //Need to pass correct
+            case 6:
+                name = "Current Medical Problems"
+                placeHolder = ""
+                fieldTag = indexPath.item //Need to pass correct
+            case 7:
+                name = "Systems Review - problems"
+                placeHolder = ""
+                fieldTag = indexPath.item //Need to pass correct
+            case 8:
+                name = "Examination findings"
+                placeHolder = ""
+                fieldTag = indexPath.item //Need to pass correct
             default:
-                infoCell.nameLabel.text = "Gender"
-                infoCell.nameField.placeholder = "Enter Gender"
-                infoCell.nameField.tag = 3
+                name = "Gender"
+                placeHolder = "Enter Gender"
+                fieldTag = 3
                 break
-            }
-            if indexPath.item == 0 {
-               
-            } else {
-                
-            }
+            }// This swicth for section case
+            infoCell.nameLabel.text = name
+            infoCell.nameField.placeholder = placeHolder
+            infoCell.nameField.tag = fieldTag
             infoCell.nameField.delegate = self
-//            infoCell.lastNameField.delegate = self
-           break
+            break
+            case let selectiveOptionCell as FormSelectiveOptionViewCell:
+                var title = ""
+                var firstOptionTitle = ""
+                var secondOptionTitle = ""
+                switch(indexPath.section) {
+                case 0:
+                    title = "Gender"
+                    firstOptionTitle = "Male"
+                    secondOptionTitle = "Female"
+                case 4:
+                    title = "MMSE"
+                    firstOptionTitle = "Yes"
+                    secondOptionTitle = "No"
+                case 5:
+                    title = "Mini Geriatric Depression Score"
+                    firstOptionTitle = "Yes"
+                    secondOptionTitle = "No"
+                case 9:
+                    switch indexPath.item {
+                    case 0:
+                        title = "Mobility"
+                        firstOptionTitle = "Bedbound"
+                        secondOptionTitle = "Stick or zimmer"
+                    case 1:
+                        title = "     "
+                        firstOptionTitle = "Wheelchair"
+                        secondOptionTitle = "Unaided"
+                    default:
+                        break
+                    }
+                    
+                    break
+                default:
+                    break
+            }
+                selectiveOptionCell.titleLable.text = title
+                selectiveOptionCell.firstOptionLabel.text = firstOptionTitle
+                selectiveOptionCell.secondOptionLabel.text = secondOptionTitle
+        case let popUpSelectionCell as FormPopUpSelectionViewCell:
+            break
         default:
             break
-        }
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 10)
+        }//Outer Swicth for Cell
     }
 }
 extension FormViewController: UITextFieldDelegate {
@@ -361,5 +446,23 @@ extension FormViewController: UITextFieldDelegate {
             gender = textField.text
             break
         }
+    }
+}
+extension FormViewController: FormListHeaderReusableViewDelegate {
+    func toggleBtnTapped(_ headerView: FormListHeaderReusableView, didTapToggleButton button: UIButton) {
+        var sectionsToReload = [button.tag]
+        for (index, section) in sections.enumerated() {
+            guard section.isExpanded, index != button.tag else { continue }
+            sectionsToReload.append(index)
+            var mutableSection = section
+            mutableSection.isExpanded = false
+            sections[index] = mutableSection
+        }
+        var section = sections[button.tag]
+        section.isExpanded = !section.isExpanded
+        sections[button.tag] = section
+        self.formListCollectionView.performBatchUpdates({
+            formListCollectionView.reloadSections(IndexSet(sectionsToReload))
+        }, completion: nil)
     }
 }
