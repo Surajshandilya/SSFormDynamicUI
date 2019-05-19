@@ -1,0 +1,158 @@
+{
+    "medical_form": {
+        "title": "Initial Resident Review - Assessment Form",
+        "color": "Orange",
+        "sections": [
+            {
+                "title": "Section 1",
+                "section_start": {
+                    "title": "Residents Information",
+                    "personal_detail": {
+                        "title": "Resident's Name",
+                        "firstName": {
+                            "title": "First Name",
+                            "type": "String",
+                            "value": [
+                                ""
+                            ]
+                        },
+                        "lastName": {
+                            "title": "Last Name",
+                            "type": "String",
+                            "value": [
+                                ""
+                            ]
+                        },
+                        "age": {
+                            "title": "D.O.B",
+                            "type": "DateTime",
+                            "value": [
+                                ""
+                            ]
+                        },
+                        "sex": {
+                            "title": "Gender",
+                            "type": "Boolean",
+                            "value": [
+                                false
+                            ]
+                        }
+                    },
+                    "address": {
+                        "title": "Nursing/Residential Home",
+                        "flat_no": {
+                            "title": "Flat Number",
+                            "type": "String",
+                            "value": [
+                                ""
+                            ]
+                        },
+                        "street": {
+                            "title": "Street",
+                            "type": "String",
+                            "value": [
+                                ""
+                            ]
+                        },
+                        "zip_code": {
+                            "title": "Zip Code",
+                            "type": "String",
+                            "value": [
+                                ""
+                            ]
+                        }
+                    },
+                    "cluster_lead": {
+                        "title": "Lead GP or Cluster Lead",
+                        "type": "Lookup",
+                        "options": [
+                            "Dr Sandar Hlaing",
+                            "Dr John Smith"
+                        ],
+                        "value": [
+                            ""
+                        ]
+                    },
+                    "date_of_assesment": {
+                        "title": "Date of Assesment",
+                        "type": "DateTime",
+                        "value": ""
+                    },
+                    "mental_state_assessment": {
+                        "title": "Mental State Assessment? MMSE",
+                        "type": "MultiSelect",
+                        "options": [
+                            "Yes",
+                            "No"
+                        ],
+                        "value": [
+                            true
+                        ]
+                    },
+                    "depression_score": {
+                        "title": "Mini Geriatric Depression Score or 6CIT or similar would be accepted",
+                        "type": "MultiSelect",
+                        "options": [
+                            "Yes",
+                            "No"
+                        ],
+                        "value": [
+                            "",
+                            ""
+                        ]
+                    },
+                    "current_problems": {
+                        "title": "Current Medical Problems",
+                        "type": "String",
+                        "value": [
+                            ""
+                        ]
+                    },
+                    "systems_review_problems_identified": {
+                        "title": "Systems Review - problems identified",
+                        "type": "String",
+                        "value": [
+                            ""
+                        ]
+                    },
+                    "examintation_findings": {
+                        "title": "Examination findings:",
+                        "type": "String",
+                        "value": [
+                            ""
+                        ]
+                    }
+                }
+            },
+            {
+                "title": "Section 2",
+                "section_start": {
+                    "title": "Specific Additional Areas",
+                    "color": "Orange",
+                    "mobility": {
+                        "title": "Mobility",
+                        "type": "Combinations",
+                        "options": [
+                            "Bedbound",
+                            "Stick or zimmer",
+                            "Wheelchair",
+                            "Unaided",
+                            "Other",
+                            {
+                                "type":"Lookup",
+                                "options":["Action Required",
+                                    "Complete Relevant Forms",
+                                    "Gather Further Requriements",
+                                    "Refer to physio"
+                                ]
+                            }
+                        ],
+                        "value": [
+                            ""
+                        ]
+                    }
+                }
+            }
+        ]
+    }
+}

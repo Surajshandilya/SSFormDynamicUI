@@ -25,7 +25,6 @@
 		5218430B2286A4BF00C86710 /* FormModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5218430A2286A4BF00C86710 /* FormModel.swift */; };
 		5218430E2286D5FE00C86710 /* SSActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5218430D2286D5FE00C86710 /* SSActivityIndicatorView.swift */; };
 		521843122286FAFE00C86710 /* form.json in Resources */ = {isa = PBXBuildFile; fileRef = 521843112286FAFE00C86710 /* form.json */; };
-		5283F8DB229160490010031C /* careForm.json in Resources */ = {isa = PBXBuildFile; fileRef = 5283F8DA229160490010031C /* careForm.json */; };
 		5283F8E722919D4B0010031C /* FormListHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5283F8E522919D4B0010031C /* FormListHeaderReusableView.swift */; };
 		5283F8E822919D4B0010031C /* FormListHeaderReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5283F8E622919D4B0010031C /* FormListHeaderReusableView.xib */; };
 		5283F8EB2291A9160010031C /* FormListBottomReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5283F8E92291A9160010031C /* FormListBottomReusableView.swift */; };
@@ -34,6 +33,7 @@
 		5283F8F02291B9610010031C /* FormSelectiveOptionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5283F8EE2291B9610010031C /* FormSelectiveOptionViewCell.xib */; };
 		5283F8F32291C3920010031C /* FormPopUpSelectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5283F8F12291C3920010031C /* FormPopUpSelectionViewCell.swift */; };
 		5283F8F42291C3920010031C /* FormPopUpSelectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5283F8F22291C3920010031C /* FormPopUpSelectionViewCell.xib */; };
+		52B2CBBE2291D7A60006EFBD /* careForm.json in Resources */ = {isa = PBXBuildFile; fileRef = 52B2CBBD2291D7A60006EFBD /* careForm.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,7 +59,6 @@
 		5218430A2286A4BF00C86710 /* FormModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormModel.swift; sourceTree = "<group>"; };
 		5218430D2286D5FE00C86710 /* SSActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSActivityIndicatorView.swift; sourceTree = "<group>"; };
 		521843112286FAFE00C86710 /* form.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = form.json; sourceTree = "<group>"; };
-		5283F8DA229160490010031C /* careForm.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = careForm.json; sourceTree = "<group>"; };
 		5283F8E522919D4B0010031C /* FormListHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormListHeaderReusableView.swift; sourceTree = "<group>"; };
 		5283F8E622919D4B0010031C /* FormListHeaderReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FormListHeaderReusableView.xib; sourceTree = "<group>"; };
 		5283F8E92291A9160010031C /* FormListBottomReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormListBottomReusableView.swift; sourceTree = "<group>"; };
@@ -68,6 +67,7 @@
 		5283F8EE2291B9610010031C /* FormSelectiveOptionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FormSelectiveOptionViewCell.xib; sourceTree = "<group>"; };
 		5283F8F12291C3920010031C /* FormPopUpSelectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormPopUpSelectionViewCell.swift; sourceTree = "<group>"; };
 		5283F8F22291C3920010031C /* FormPopUpSelectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FormPopUpSelectionViewCell.xib; sourceTree = "<group>"; };
+		52B2CBBD2291D7A60006EFBD /* careForm.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = careForm.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,7 +178,7 @@
 		520AE0F4227CA68F005CF5B5 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				5283F8DA229160490010031C /* careForm.json */,
+				52B2CBBD2291D7A60006EFBD /* careForm.json */,
 				521843112286FAFE00C86710 /* form.json */,
 				520AE0F2227CA688005CF5B5 /* ContainerCollectionViewCell.swift */,
 				520AE0F5227CA7DC005CF5B5 /* ReuseIdentifiable.swift */,
@@ -283,13 +283,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52B2CBBE2291D7A60006EFBD /* careForm.json in Resources */,
 				5283F8F42291C3920010031C /* FormPopUpSelectionViewCell.xib in Resources */,
 				5283F8F02291B9610010031C /* FormSelectiveOptionViewCell.xib in Resources */,
 				5283F8E822919D4B0010031C /* FormListHeaderReusableView.xib in Resources */,
 				520AE0DF227C7CEF005CF5B5 /* LaunchScreen.storyboard in Resources */,
 				5283F8EC2291A9160010031C /* FormListBottomReusableView.xib in Resources */,
 				520AE0DC227C7CEF005CF5B5 /* Assets.xcassets in Resources */,
-				5283F8DB229160490010031C /* careForm.json in Resources */,
 				520AE0EF227CA4DE005CF5B5 /* FormListCollectionViewCell.xib in Resources */,
 				521843122286FAFE00C86710 /* form.json in Resources */,
 				520AE0D7227C7CED005CF5B5 /* Main.storyboard in Resources */,
