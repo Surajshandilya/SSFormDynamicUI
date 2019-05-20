@@ -235,6 +235,12 @@ class FormViewController: UIViewController {
             return
         }
     }
+    @IBAction func showUploadedFileList(_ sender: Any) {
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        guard let formVC = storyBoard.instantiateViewController(withIdentifier: "UploadedFormListControllerId") as? UploadedFormListController else { return }
+        self.navigationController?.pushViewController(formVC, animated: true)
+    }
+    
     @IBAction func uploadUserDetails(_ sender: Any) {
         self.view.endEditing(true)
        let model = GetFormModel(firstName: self.firstName, lastName: self.lastName)

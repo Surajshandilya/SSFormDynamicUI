@@ -25,6 +25,9 @@
 		5218430B2286A4BF00C86710 /* FormModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5218430A2286A4BF00C86710 /* FormModel.swift */; };
 		5218430E2286D5FE00C86710 /* SSActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5218430D2286D5FE00C86710 /* SSActivityIndicatorView.swift */; };
 		521843122286FAFE00C86710 /* form.json in Resources */ = {isa = PBXBuildFile; fileRef = 521843112286FAFE00C86710 /* form.json */; };
+		5265B4C92292F73F000E4FCB /* UploadedFormListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5265B4C82292F73F000E4FCB /* UploadedFormListController.swift */; };
+		5265B4CD2292F807000E4FCB /* UploadFormListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5265B4CB2292F807000E4FCB /* UploadFormListViewCell.swift */; };
+		5265B4CE2292F807000E4FCB /* UploadFormListViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5265B4CC2292F807000E4FCB /* UploadFormListViewCell.xib */; };
 		5283F8E722919D4B0010031C /* FormListHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5283F8E522919D4B0010031C /* FormListHeaderReusableView.swift */; };
 		5283F8E822919D4B0010031C /* FormListHeaderReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5283F8E622919D4B0010031C /* FormListHeaderReusableView.xib */; };
 		5283F8EB2291A9160010031C /* FormListBottomReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5283F8E92291A9160010031C /* FormListBottomReusableView.swift */; };
@@ -59,6 +62,9 @@
 		5218430A2286A4BF00C86710 /* FormModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormModel.swift; sourceTree = "<group>"; };
 		5218430D2286D5FE00C86710 /* SSActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSActivityIndicatorView.swift; sourceTree = "<group>"; };
 		521843112286FAFE00C86710 /* form.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = form.json; sourceTree = "<group>"; };
+		5265B4C82292F73F000E4FCB /* UploadedFormListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadedFormListController.swift; sourceTree = "<group>"; };
+		5265B4CB2292F807000E4FCB /* UploadFormListViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadFormListViewCell.swift; sourceTree = "<group>"; };
+		5265B4CC2292F807000E4FCB /* UploadFormListViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UploadFormListViewCell.xib; sourceTree = "<group>"; };
 		5283F8E522919D4B0010031C /* FormListHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormListHeaderReusableView.swift; sourceTree = "<group>"; };
 		5283F8E622919D4B0010031C /* FormListHeaderReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FormListHeaderReusableView.xib; sourceTree = "<group>"; };
 		5283F8E92291A9160010031C /* FormListBottomReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormListBottomReusableView.swift; sourceTree = "<group>"; };
@@ -137,6 +143,7 @@
 			children = (
 				520AE0FE227CB20A005CF5B5 /* Home */,
 				520AE0FD227CB1FE005CF5B5 /* Forms */,
+				5265B4CA2292F747000E4FCB /* UploadedFormList */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -154,6 +161,7 @@
 			children = (
 				520AE0F1227CA663005CF5B5 /* FormCollectionView */,
 				520AE0F4227CA68F005CF5B5 /* Common */,
+				5265B4CF2292F80C000E4FCB /* UploadFormList */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -212,6 +220,23 @@
 				5218430A2286A4BF00C86710 /* FormModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		5265B4CA2292F747000E4FCB /* UploadedFormList */ = {
+			isa = PBXGroup;
+			children = (
+				5265B4C82292F73F000E4FCB /* UploadedFormListController.swift */,
+			);
+			path = UploadedFormList;
+			sourceTree = "<group>";
+		};
+		5265B4CF2292F80C000E4FCB /* UploadFormList */ = {
+			isa = PBXGroup;
+			children = (
+				5265B4CB2292F807000E4FCB /* UploadFormListViewCell.swift */,
+				5265B4CC2292F807000E4FCB /* UploadFormListViewCell.xib */,
+			);
+			path = UploadFormList;
 			sourceTree = "<group>";
 		};
 		FEAC5371C50E765554E4DA30 /* Pods */ = {
@@ -290,6 +315,7 @@
 				520AE0DF227C7CEF005CF5B5 /* LaunchScreen.storyboard in Resources */,
 				5283F8EC2291A9160010031C /* FormListBottomReusableView.xib in Resources */,
 				520AE0DC227C7CEF005CF5B5 /* Assets.xcassets in Resources */,
+				5265B4CE2292F807000E4FCB /* UploadFormListViewCell.xib in Resources */,
 				520AE0EF227CA4DE005CF5B5 /* FormListCollectionViewCell.xib in Resources */,
 				521843122286FAFE00C86710 /* form.json in Resources */,
 				520AE0D7227C7CED005CF5B5 /* Main.storyboard in Resources */,
@@ -367,9 +393,11 @@
 				520AE0F6227CA7DC005CF5B5 /* ReuseIdentifiable.swift in Sources */,
 				520AE0F8227CA813005CF5B5 /* StaticCellable.swift in Sources */,
 				520AE0DA227C7CED005CF5B5 /* SSForms.xcdatamodeld in Sources */,
+				5265B4CD2292F807000E4FCB /* UploadFormListViewCell.swift in Sources */,
 				5283F8EB2291A9160010031C /* FormListBottomReusableView.swift in Sources */,
 				5218430E2286D5FE00C86710 /* SSActivityIndicatorView.swift in Sources */,
 				5283F8EF2291B9610010031C /* FormSelectiveOptionViewCell.swift in Sources */,
+				5265B4C92292F73F000E4FCB /* UploadedFormListController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
