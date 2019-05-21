@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class FormViewController: UIViewController {
     //Web service -- http://77.68.84.237/HixService/EMIS.svc/help
@@ -262,8 +263,13 @@ class FormViewController: UIViewController {
             request.httpBody = searialStr
             let task = URLSession.shared.dataTask(with: request as URLRequest) {
                 data, response, error in
-                print(response)
+                guard let result = response else {
+                    self.insertUploadedFilesInDB(fileName: str, status: false)
+                    return
+                }
+                print(result)
                 DispatchQueue.main.async {
+                    self.insertUploadedFilesInDB(fileName: str, status: true)
                     self.viewLoader.stopAnimating()
                     self.showUploadAlert()
                 }
@@ -281,7 +287,7 @@ class FormViewController: UIViewController {
                                       message: "Form is uploaded successfully.",
                                       preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (buttonAction) in
-            self.navigationController?.popViewController(animated: true)
+//            self.navigationController?.popViewController(animated: true)
         }))
         self.present(alert, animated: true)
     }
@@ -470,5 +476,22 @@ extension FormViewController: FormListHeaderReusableViewDelegate {
         self.formListCollectionView.performBatchUpdates({
             formListCollectionView.reloadSections(IndexSet(sectionsToReload))
         }, completion: nil)
+    }
+}
+extension FormViewController {
+    func insertUploadedFilesInDB(fileName: String, status: Bool) {
+        let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
+        print("Store Url path == \(paths[0])")
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let context = appDelegate.persistentContainer.viewContext
+        guard let entity = NSEntityDescription.entity(forEntityName: "UploadedForms", in: context) else { return }
+        let uploadedFileObj = NSManagedObject(entity: entity, insertInto: context)
+        uploadedFileObj.setValue(fileName, forKey: "fileName")
+        uploadedFileObj.setValue(status, forKey: "fileStatus")
+        do {
+            try context.save()
+        } catch {
+            print("Failed saving")
+        }
     }
 }

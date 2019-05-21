@@ -141,7 +141,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Form" leftItemsSupplementBackButton="YES" id="spP-nh-mZs">
                         <barButtonItem key="backBarButtonItem" title="Back" id="2ee-mc-ntn"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="fastForward" id="SDg-V9-sNS">
+                        <barButtonItem key="rightBarButtonItem" title="Files" id="SDg-V9-sNS">
                             <connections>
                                 <action selector="showUploadedFileList:" destination="BYZ-38-t0r" id="hPd-FY-aR6"/>
                             </connections>
